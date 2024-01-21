@@ -33,7 +33,7 @@ View textView;
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(login.this,LoginSuccess.class);
+                Intent intent=new Intent(login.this,List.class);
                 startActivity(intent);
 
             }

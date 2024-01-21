@@ -7,11 +7,14 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/icon1"
-        android:roundIcon="@drawable/icon1"
         android:label="@string/app_name"
+        android:roundIcon="@drawable/icon1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".List"
+            android:exported="false" />
         <activity
             android:name=".RegistrationUser"
             android:exported="false" />
