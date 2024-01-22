@@ -3,8 +3,10 @@ package com.example.demo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -23,32 +25,34 @@ public class List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
         Listview=findViewById(R.id.List1);
-        String [] data={"BMW","FIAT","JAGUAR","TESLA","BMW","FIAT","JAGUAR","TESLA","BMW","FIAT","JAGUAR","TESLA"};
-        Integer [] imgid={R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla,R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla,R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla};
-        customadapter cursorAdapter = new customadapter(getApplicationContext(),data,imgid);
-        Listview.setAdapter(cursorAdapter);
+        String [] name={"BMW","FIAT","JAGUAR","TESLA","BMW","FIAT","JAGUAR","TESLA","BMW","FIAT","JAGUAR","TESLA"};
+        Integer [] img={R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla,R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla,R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla};
+
+        MyListAdapter adapter = new MyListAdapter(this,name,img);
+        Listview.setAdapter(adapter);
     }
-    public class customadapter extends ArrayAdapter<String>{
-        private final Context context;
-        private final String[]data;
-        private final Integer[]imgid;
+    public class MyListAdapter extends ArrayAdapter<String>{
+        private final Activity context;
+        private final String[] name;
+        private final Integer[] img;
 
-        public customadapter(@NonNull Context context, String[]data,Integer[]imgid) {
-            super(context, R.layout.customlist,data);
+        public MyListAdapter(@NonNull Activity context, String[] name,Integer[] img) {
+            super(context, R.layout.customlist,name);
             this.context=context;
-            this.data=data;
-            this.imgid=imgid;
+            this.img=img;
+            this.name=name;
         }
-        public View getView(int i, View convertview, ViewGroup viewGroup){
-            View v1=getLayoutInflater().inflate(R.layout.customlist,viewGroup,true);
-            ImageView img=v1.findViewById(R.id.image);
-            TextView name=v1.findViewById(R.id.text);
+        public View getView(int position, View view, ViewGroup parent){
+            LayoutInflater inflater=context.getLayoutInflater();
+            View v1=inflater.inflate(R.layout.customlist,null,true);
+            ImageView imageView=(ImageView) v1.findViewById(R.id.image);
+            TextView titleText=(TextView) v1.findViewById(R.id.text);
 
-            img.setImageResource(imgid[i]);
-            name.setText(data[i]);
+            titleText.setText(name[position]);
+            imageView.setImageResource(img[position]);
 
             return v1;
 
-        }
+        };
     }
 }
