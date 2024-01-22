@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class List extends AppCompatActivity {
     ListView Listview;
@@ -23,9 +27,24 @@ public class List extends AppCompatActivity {
 
     }
     public class customadapter extends ArrayAdapter<String>{
+        private final Context context;
+        private final String[]data;
+        private final Integer[]imgid;
 
-        public customadapter(@NonNull Context context, int resource) {
-            super(context, resource);
+        public customadapter(@NonNull Context context, String[]data,Integer[]imgid) {
+            super(context, R.layout.customlist,data);
+            this.context=context;
+            this.data=data;
+            this.imgid=imgid;
+        }
+        public View getView(int i, View convertview, ViewGroup viewGroup){
+            View v1=getLayoutInflater().inflate(R.layout.customlist,viewGroup,true);
+            ImageView img=v1.findViewById(R.id.image);
+            TextView name=v1.findViewById(R.id.text);
+
+            img.setImageResource(imgid[i]);
+            name.setText(data[i]);
+
         }
     }
 }
