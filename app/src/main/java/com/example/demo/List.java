@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +25,8 @@ public class List extends AppCompatActivity {
         Listview=findViewById(R.id.List1);
         String [] data={"BMW","FIAT","JAGUAR","TESLA","BMW","FIAT","JAGUAR","TESLA","BMW","FIAT","JAGUAR","TESLA"};
         Integer [] imgid={R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla,R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla,R.drawable.bmw,R.drawable.fiat,R.drawable.jaguar,R.drawable.tesla};
-
+        customadapter cursorAdapter = new customadapter(getApplicationContext(),data,imgid);
+        Listview.setAdapter(cursorAdapter);
     }
     public class customadapter extends ArrayAdapter<String>{
         private final Context context;
@@ -44,6 +46,8 @@ public class List extends AppCompatActivity {
 
             img.setImageResource(imgid[i]);
             name.setText(data[i]);
+
+            return v1;
 
         }
     }
