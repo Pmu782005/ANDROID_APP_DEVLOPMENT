@@ -24,6 +24,7 @@ View textView;
         textView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 Intent intent=new Intent(login.this,RegistrationUser.class);
                 startActivity(intent);
 
